@@ -35,5 +35,11 @@ Fair_Foul_r = pd.DataFrame(FFR)
 Fair_Foul_r.to_csv('K%.csv', mode='a', index=False, header=False)
 
 
-#X = df[[O-Swing%, O-Contact%, Z-Swing%, Z-Contact%, Zone%, F-Strike%, SwStr%, CSW%, Fair/Foul ratio]]
-#Y = df[K%]
+X = df[["O-Swing%", "O-Contact%", "Z-Swing%", "Z-Contact%", "Zone%", "F-Strike%", "SwStr%", "CSW%", "Fair/Foul ratio"]]
+Y = df["K%"]
+regr = linear_model.LinearRegression()
+regr.fit()
+
+predictSoto = regr.predict([0.177, 0.568, 0.353, 0.667, 0.873, 0.816, 0.449])
+
+print(predictSoto)
