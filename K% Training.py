@@ -16,7 +16,7 @@ K_percent.GetContentFile('K%.csv')
 df = pd.read_csv('K%.csv')
 #print (df)
 
-for i in range(0, 2):
+for i in range(0, 8):
     Pitches = float(df.iat[i, 14])
     Swing_pct = float(df.iat[i, 15])
     Contact_pct = float(df.iat[i, 16])
