@@ -28,18 +28,21 @@ for i in range(0, 8):
     Fouls = Contacted_Balls-Events
     Fair_Foul_ratio = (Events/Contacted_Balls)/(Fouls/Contacted_Balls)
     print (Fair_Foul_ratio)
-FFR = {
-    'Fair/Foul ratio': [Fair_Foul_ratio]
-    }
-Fair_Foul_r = pd.DataFrame(FFR)
-Fair_Foul_r.to_csv('K%.csv', mode='a', index=False, header=False)
+    FFR = drive.CreateFile({'id':'1nwMZF6Zh5f_O-fRENcmVBmC_QKHoQgFD'})
+    FFR.SetContentFile('K%.csv')
+    FFR.Upload
+    #FFR = {
+        #'Fair/Foul ratio': [Fair_Foul_ratio]
+    #}
+    #Fair_Foul_r = pd.DataFrame(FFR)
+    #Fair_Foul_r.to_csv('K%.csv', mode='a', index=False, header=False)
 
 
-X = df[["O-Swing%", "O-Contact%", "Z-Swing%", "Z-Contact%", "Zone%", "F-Strike%", "SwStr%", "CSW%", "Fair/Foul ratio"]]
-Y = df["K%"]
-regr = linear_model.LinearRegression()
-regr.fit()
+#X = df[["O-Swing%", "O-Contact%", "Z-Swing%", "Z-Contact%", "Zone%", "F-Strike%", "SwStr%", "CSW%", "Fair/Foul ratio"]]
+#Y = df["K%"]
+#regr = linear_model.LinearRegression()
+#regr.fit()
 
-predictSoto = regr.predict([0.177, 0.568, 0.353, 0.667, 0.873, 0.816, 0.449])
+#predictSoto = regr.predict([0.177, 0.568, 0.353, 0.667, 0.873, 0.816, 0.449])
 
-print(predictSoto)
+#print(predictSoto)
