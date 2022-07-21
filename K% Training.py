@@ -45,16 +45,16 @@ for i in range(0, 1450): # iterate thru all players
 average_deviation = total_deviation/1450
 print (f"Average Deviation: {average_deviation}%")
 
-d = {}
-linear_regr_df = pd.DataFrame(data=d,columns=["Season","Name","xK%","K%","Deviation","Deviation%"])
-print(linear_regr_df)
-for i in range(0,1450):
-     predictK = regr.predict([df.iloc[i][7:16]]) # feed in required data
-     xK = round(predictK[0]*100,3)
-     K = round(df.at[i,'K%']*100,2)
-     deviation = round((xK-K),3) # the difference between x and real rate
-     deviation_r = round((xK-K)/K*100,3) # the percentage of deviation (deviation value/real stat)
-     row = [df.at[i,'Season'],df.at[i,'Name'],xK,K,deviation,deviation_r]
-     linear_regr_df.loc[i]=row
-print(linear_regr_df)
-linear_regr_df.to_csv("linear_regr_result.csv")
+# d = {}
+# linear_regr_df = pd.DataFrame(data=d,columns=["Season","Name","xK%","K%","Deviation","Deviation%"])
+# print(linear_regr_df)
+# for i in range(0,100):
+#     predictK = regr.predict([df.iloc[i][7:16]]) # feed in required data
+#     xK = round(predictK[0]*100,3)
+#     K = round(df.at[i,'K%']*100,2)
+#     deviation = round((xK-K),3) # the difference between x and real rate
+#     deviation_r = round((xK-K)/K*100,3) # the percentage of deviation (deviation value/real stat)
+#     row = [df.at[i,'Season'],df.at[i,'Name'],xK,K,deviation,deviation_r]
+#     linear_regr_df.loc[i]=row
+# print(linear_regr_df)
+# linear_regr_df.to_csv("linear_regr_result.csv")
