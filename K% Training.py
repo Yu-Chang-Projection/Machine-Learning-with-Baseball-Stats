@@ -36,4 +36,4 @@ K_list, xK_list = regr_df["K%"].to_list(),regr_df["xK%"].to_list()
 MSE = mean_squared_error(K_list, xK_list)
 R2 = r2_score(K_list, xK_list)
 print (f"Average Deviation: {average_deviation}% MSE: {MSE}  R2: {R2}")
-regr_df.to_csv("poly_testing.csv")s
+regr_df.to_csv("poly_testing.csv")

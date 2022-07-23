@@ -5,18 +5,19 @@ from sklearn import linear_model
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.metrics import mean_squared_error, r2_score
 
-train_df = pd.read_csv('CSV_files/K%_training_new.csv')
+train_df = pd.read_excel('CSV_files/K_savant.xlsx', sheet_name='Training')
+df = pd.read_excel('CSV_files/K_savant.xlsx', sheet_name='Testing')
+# train_df = pd.read_csv('CSV_files/K%_training.csv')
+# df = pd.read_csv('CSV_files/K%_testing.csv')
 
-X = train_df[["O-Swing%", "O-Contact%", "Z-Swing%", "Z-Contact%", "Zone%", "F-Strike%", "SwStr%", "CSW%", "MBs%", "Meatball%", "Edge%", "Fair/Foul ratio"]]
+X = train_df[["O-Swing%", "O-Contact%", "Z-Swing%", "Z-Contact%", "Zone%", "F-Strike%", "SwStr%", "CSW%", "M-Swing%", "Meat%", "Edge%", "Fair/Foul ratio"]]
 y = train_df["K%"]
-poly = PolynomialFeatures(degree=3)
+poly = PolynomialFeatures(degree=2)
 X_poly = poly.fit_transform(X)
 poly.fit(X_poly, y)
 regr = linear_model.LinearRegression()
 regr.fit(X_poly, y)
 
-df = pd.read_csv('CSV_files/K%_testing.csv')
-# p = 714
 p = 135
 total_deviation = 0
 regr_df = pd.DataFrame(data={},columns=["Season","Name","xK%","K%","Deviation","Deviation%"])
@@ -28,7 +29,6 @@ for i in range(0, p): # iterate thru all players
     deviation_r = round((xK-K)/K*100,3) # the percentage of deviation (deviation value/real stat)
     row = [df.at[i,'Season'],df.at[i,'Name'],xK,K,deviation,deviation_r]
     regr_df.loc[i] = row
-    print(f"Player: {df.at[i,'Season']} {df.at[i,'Name']} xK%: {xK}%  K%: {K}%  Deviation: {deviation}%  Deviation%: {deviation_r}%")
     total_deviation = total_deviation + deviation if deviation >= 0 else total_deviation - deviation
 
 average_deviation = total_deviation/p
