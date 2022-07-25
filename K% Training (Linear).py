@@ -32,8 +32,8 @@ for j in range(0, 2000):
         regr_df.loc[pid] = row
 
     K_list, xK_list = regr_df["K%"].to_list(),regr_df["xK%"].to_list()
-    RMSE = sqrt(mean_squared_error(K_list, xK_list))
     MAE = mean_absolute_error(K_list, xK_list)
+    RMSE = sqrt(mean_squared_error(K_list, xK_list))
     R2 = r2_score(K_list, xK_list)
     result_row = [MAE,RMSE,R2]
     result_df.loc[j] = result_row

@@ -1,40 +1,48 @@
 import pandas as pd
 import numpy as np
 import tensorflow as tf
+from math import sqrt
 from sklearn import linear_model
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+from sklearn.model_selection import train_test_split
+import pickle
 
-train_df = pd.read_excel('CSV_files/K%.xlsx', sheet_name='Training')
-df = pd.read_excel('CSV_files/K%.xlsx', sheet_name='Testing')
-# train_df = pd.read_csv('CSV_files/K%_training.csv')
-# df = pd.read_csv('CSV_files/K%_testing.csv')
+def save_model(regr):
+    filename = 'Best Models/Poly (85:15).pkl'
+    pickle.dump(regr, open(filename, 'wb')) #Save the model
 
-X = train_df[["O-Swing%", "O-Contact%", "Z-Swing%", "Z-Contact%", "Zone%", "F-Strike%", "SwStr%", "CSW%", "Meat%", "Edge%", "Fair/Foul ratio"]]
-y = train_df["K%"]
-poly = PolynomialFeatures(degree=2)
-X_poly = poly.fit_transform(X)
-poly.fit(X_poly, y)
-regr = linear_model.LinearRegression()
-regr.fit(X_poly, y)
+prev_RMSE = 10
+full_df = pd.read_csv('CSV_files/K%_data.csv')
+result_df = pd.DataFrame(data={},columns=["MAE", "RMSE", "R2"])
+for j in range(0, 100):
+    train_df, test_df = train_test_split(full_df, test_size=0.1)
+    X = train_df[["O-Swing%", "O-Contact%", "Z-Swing%", "Z-Contact%", "Zone%", "F-Strike%", "SwStr%", "CSW%", "M-Swing%", "Meat%", "Edge%", "Fair/Foul ratio"]]
+    y = train_df["K%"]
+    poly = PolynomialFeatures(degree=2)
+    X_poly = poly.fit_transform(X)
+    regr = linear_model.LinearRegression()
+    regr.fit(X_poly, y)
 
-p = 135
-total_deviation = 0
-regr_df = pd.DataFrame(data={},columns=["Season","Name","xK%","K%","Deviation","Deviation%"])
-for i in range(0, p): # iterate thru all players
-    predictK = regr.predict(poly.fit_transform([df.iloc[i][7:18]])) # feed in required data
-    xK = round(predictK[0]*100,3)
-    K = round(df.at[i,'K%']*100,2)
-    deviation = round((xK-K),3) # the difference between x and real rate
-    deviation_r = round((xK-K)/K*100,3) # the percentage of deviation (deviation value/real stat)
-    row = [df.at[i,'Season'],df.at[i,'Name'],xK,K,deviation,deviation_r]
-    regr_df.loc[i] = row
-    total_deviation = total_deviation + deviation if deviation >= 0 else total_deviation - deviation
+    regr_df = pd.DataFrame(data={},columns=["Season","Name","xK%","K%"])
+    for i in range(0, test_df.shape[0]): # iterate thru all players
+        predictK = regr.predict(poly.fit_transform([test_df.iloc[i][7:19]])) # feed in required data
+        pid = test_df.iat[i, 0]
+        xK = round(predictK[0]*100,3)
+        K = round(test_df.at[pid,'K%']*100,2)
+        row = [test_df.at[pid,'Season'],test_df.at[pid,'Name'],xK,K]
+        regr_df.loc[pid] = row
 
-average_deviation = total_deviation/p
-K_list, xK_list = regr_df["K%"].to_list(),regr_df["xK%"].to_list()
-MSE = mean_squared_error(K_list, xK_list)
-R2 = r2_score(K_list, xK_list)
-print (f"Average Deviation: {average_deviation}% MSE: {MSE}  R2: {R2}")
-print (regr_df)
-regr_df.to_csv("poly_testing.csv")
+    K_list, xK_list = regr_df["K%"].to_list(), regr_df["xK%"].to_list()
+    MAE = mean_absolute_error(K_list, xK_list)
+    RMSE = sqrt(mean_squared_error(K_list, xK_list))
+    R2 = r2_score(K_list, xK_list)
+    result_row = [MAE, RMSE, R2]
+    result_df.loc[j] = result_row
+    if RMSE < prev_RMSE:
+        save_model(regr)
+        print(RMSE)
+        prev_RMSE = RMSE
+
+print(result_df)
+result_df.to_csv("Poly_results.csv")
