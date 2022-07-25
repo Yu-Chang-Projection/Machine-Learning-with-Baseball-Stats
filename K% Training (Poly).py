@@ -9,14 +9,14 @@ from sklearn.model_selection import train_test_split
 import pickle
 
 def save_model(regr):
-    filename = 'Best Models/Poly (85:15).pkl'
+    filename = 'Best_Models/Poly_(85:15).pkl'
     pickle.dump(regr, open(filename, 'wb')) #Save the model
 
 prev_RMSE = 10
 full_df = pd.read_csv('CSV_files/K%_data.csv')
 result_df = pd.DataFrame(data={},columns=["MAE", "RMSE", "R2"])
-for j in range(0, 100):
-    train_df, test_df = train_test_split(full_df, test_size=0.1)
+for j in range(0, 2000):
+    train_df, test_df = train_test_split(full_df, test_size=0.15)
     X = train_df[["O-Swing%", "O-Contact%", "Z-Swing%", "Z-Contact%", "Zone%", "F-Strike%", "SwStr%", "CSW%", "M-Swing%", "Meat%", "Edge%", "Fair/Foul ratio"]]
     y = train_df["K%"]
     poly = PolynomialFeatures(degree=2)
