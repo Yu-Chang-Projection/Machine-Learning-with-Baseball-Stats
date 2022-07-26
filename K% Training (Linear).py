@@ -9,7 +9,7 @@ import pickle
 
 # functions
 def save_model(regr):
-    filename = 'Best_Models/Linear_(85:15).pkl'
+    filename = 'Best_Models/Linear_(15).pkl'
     pickle.dump(regr, open(filename, 'wb')) #Save the model
     
 prev_RMSE = 10
