@@ -7,12 +7,10 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 import pickle
 
-
 # functions
 def save_model(regr):
     filename = 'best_model.pkl'
     pickle.dump(regr, open(filename, 'wb'))  # Save the model
-
 
 prev_RMSE = 100
 full_df = pd.read_csv('CSV_files/K%_data.csv')

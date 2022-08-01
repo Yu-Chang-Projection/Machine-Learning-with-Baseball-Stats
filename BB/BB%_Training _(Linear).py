@@ -9,14 +9,14 @@ import pickle
 
 # functions
 def save_model(regr):
-    filename = 'Best_Models/Linear_BB_(10).pkl'
+    filename = '../Best_Models/Linear_BB_(20_2).pkl'
     pickle.dump(regr, open(filename, 'wb'))  # Save the model
 
 prev_RMSE = 10
-full_df = pd.read_csv('CSV_files/BB%_data.csv')
+full_df = pd.read_csv('../CSV_files/BB%_data.csv')
 result_df = pd.DataFrame(data={}, columns=["MAE", "RMSE", "R2"])
-for j in range(50):
-    train_df, test_df = train_test_split(full_df, test_size=0.10)
+for j in range(2000):
+    train_df, test_df = train_test_split(full_df, test_size=0.20)
     X = train_df[["O-Swing%", "O-Contact%", "Z-Swing%", "Z-Contact%", "Zone%", "F-Strike%", "SwStr%", "CSW%", "Fair/Foul ratio"]]
     y = train_df["BB%"]
     regr = linear_model.LinearRegression()
@@ -24,7 +24,7 @@ for j in range(50):
 
     regr_df = pd.DataFrame(data={}, columns=["Season", "Name", "xBB%", "BB%"])
     for i in range(0, test_df.shape[0]):  # iterate thru all players, shape[0]: the row count of df
-        predictBB = regr.predict([test_df.iloc[i][7:15]])  # feed in required data
+        predictBB = regr.predict([test_df.iloc[i][7:16]])  # feed in required data
         pid = test_df.iat[i, 0]
         xBB = round(predictBB[0]*100, 3)
         BB = round(test_df.at[pid, 'BB%']*100, 2)
@@ -43,4 +43,4 @@ for j in range(50):
         prev_RMSE = RMSE
 
 print(result_df)
-result_df.to_csv("Linear_BB")
+result_df.to_csv("Linear_BB.csv")
