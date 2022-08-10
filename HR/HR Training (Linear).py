@@ -12,10 +12,10 @@ def save_model(regr):
     filename = '../Best_Models/Linear_HR_(15).pkl'
     pickle.dump(regr, open(filename, 'wb'))  # Save the model
 
-prev_RMSE = 10
+prev_R2 = 0.75
 full_df = pd.read_csv('../CSV_files/HR_data.csv')
 result_df = pd.DataFrame(data={}, columns=["MAE", "RMSE", "R2"])
-for j in range(3000):
+for j in range(30):
     train_df, test_df = train_test_split(full_df, test_size=0.15)
     X = train_df[["FB%", "LD%", "HR/FB", "Pull%", "Barrel%", "HardHit%"]]
     y = train_df["HR%"]
@@ -36,10 +36,10 @@ for j in range(3000):
     R2 = r2_score(HR_list, xHR_list)
     result_row = [MAE, RMSE, R2]
     result_df.loc[j] = result_row
-    if RMSE < prev_RMSE:
+    if R2 > prev_R2:
         save_model(regr)
-        print(RMSE)
-        prev_RMSE = RMSE
+        print(R2)
+        prev_R2 = R2
         regr_df.to_csv("Linear_every.csv")
 
 print(result_df)
