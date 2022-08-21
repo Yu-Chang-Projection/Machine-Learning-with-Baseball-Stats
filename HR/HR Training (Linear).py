@@ -43,4 +43,3 @@ for j in range(30):
         regr_df.to_csv("Linear_every.csv")
 
 print(result_df)
-result_df.to_csv("Linear_HR.csv")

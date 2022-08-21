@@ -15,8 +15,8 @@ def save_model(regr):
 prev_RMSE = 10
 full_df = pd.read_csv('../CSV_files/BB%_data.csv')
 result_df = pd.DataFrame(data={}, columns=["MAE", "RMSE", "R2"])
-for j in range(2000):
-    train_df, test_df = train_test_split(full_df, test_size=0.20)
+for j in range(20):
+    train_df, test_df = train_test_split(full_df, test_size=0.15)
     X = train_df[["O-Swing%", "O-Contact%", "Z-Swing%", "Z-Contact%", "Zone%", "F-Strike%", "SwStr%", "CSW%", "Fair/Foul ratio"]]
     y = train_df["BB%"]
     regr = linear_model.LinearRegression()
