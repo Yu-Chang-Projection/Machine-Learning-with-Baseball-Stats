@@ -3,6 +3,7 @@ import numpy as np
 import tensorflow as tf
 from math import sqrt
 from sklearn import linear_model
+from sklearn.preprocessing import PolynomialFeatures
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 import pickle
@@ -10,11 +11,11 @@ import itertools
 
 # functions
 def save_model(regr):
-    filename = '../Best_Models/Linear_2B_(15).pkl'
+    filename = '../Best_Models/Poly_ISO_(15).pkl'
     pickle.dump(regr, open(filename, 'wb'))  # Save the model
 
 # main fuction
-def training_function(selected_stats, target_stat, test_size=0.15, prev_R2 = 0.15, loops = 20):
+def training_function(selected_stats, target_stat, test_size=0.15, prev_R2 = 0.6, loops = 20):
 
     # create Dataframes
     full_df = pd.read_csv(f'../CSV_files/{target_stat}_data.csv')
@@ -25,15 +26,17 @@ def training_function(selected_stats, target_stat, test_size=0.15, prev_R2 = 0.1
         train_df, test_df = train_test_split(full_df, test_size = test_size)
         X = train_df[selected_stats]
         y = train_df[target_stat]
+        poly = PolynomialFeatures(degree=2)
+        X_poly = poly.fit_transform(X)
         regr = linear_model.LinearRegression()
-        regr.fit(X.values, y)
+        regr.fit(X_poly, y)
 
         columns = test_df.loc[:,selected_stats]
         regr_df = pd.DataFrame(data={}, columns=["Season", "Name", f"x{target_stat}",target_stat])
         for i in range(0, test_df.shape[0]):  # iterate thru all players, shape[0]: the row count of df
             pid = test_df.iat[i, 0]
-            predict2B = regr.predict([columns.loc[pid]])  # feed in required data
-            expected_stat = round(predict2B[0], 3)
+            predictISO = regr.predict(poly.fit_transform([columns.loc[pid]]))  # feed in required data
+            expected_stat = round(predictISO[0], 3)
             real_stat = round(test_df.at[pid, target_stat], 3)
             row = [test_df.at[pid, 'Season'], test_df.at[pid, 'Name'], expected_stat, real_stat]
             regr_df.loc[pid] = row
@@ -47,13 +50,13 @@ def training_function(selected_stats, target_stat, test_size=0.15, prev_R2 = 0.1
         if R2 > prev_R2:
             save_model(regr)
             prev_R2 = R2
-            regr_df.to_csv(f"Linear_every_player_{target_stat}.csv")
+            regr_df.to_csv(f"Poly_every_player_{target_stat}.csv")
 
     print(f"MAX R2: {max(result_df['R2'].to_list())}", f"AVG R2: {sum(result_df['R2'].to_list())/loops}")
 
 # parameters
 selected_stats = ["FB%","GB%","LD%","SweetSpot%","Barrel%","HardHit%","LDFB_EV","Pull%","Cent%","Oppo%","Spd"]
-target_stat = "2B%"
+target_stat = "ISO"
 
 # run function
 for stat_combo in itertools.combinations(selected_stats,10):
