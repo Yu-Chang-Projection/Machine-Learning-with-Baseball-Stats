@@ -1,0 +1,43 @@
+.stat-table{
+    width: 100%;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+table, thead, tbody{
+    width: 100%;
+}
+
+tr{
+    display: flex;
+}
+
+td{
+    text-align: center;
+    width: 25%;
+    border: 0.03vw gray solid;
+    font-size: 1.2vw;
+}
+
+.head-name{
+    font-weight: bold;
+    width: 55%;
+}
+
+.head-piece{
+    font-weight: bold;
+}
+
+.player-name{
+    color: rgb(11, 67, 117);
+    width: 55%;
+}
+.stat-piece{
+}
+
+.hightlight-column{
+    color: rgb(11, 42, 128);
+    background-color: aliceblue;
+}

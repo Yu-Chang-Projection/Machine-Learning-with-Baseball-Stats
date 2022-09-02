@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="football_fantasy_app">
+    <meta name="theme-color" content="#ECF6FF">
+        
+    {% block style_list %}
+    {% endblock %}
+
+    
+    {% block title %}
+    {% endblock %}
+
+    {% block register %}
+    {% endblock %}
+    
+
+    <!-- JQuery, Bootstrap, Socket -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+    <!-- CSS stylesheets -->
+    <link rel="stylesheet" href="static/stylesheets/module.css" type="text/css">
+    
+    <!-- Extra Links -->
+    {% block links %}
+    {% endblock %}
+</head>
+
+<body>
+    <span class="alert alert-hide">
+        <div class="alert-title">Confirm</div>
+        <hr>
+        <div class="alert-content"></div>
+        <div class="alert-ok"></div>
+    </span>
+    {%block universal %}
+    {%endblock%}
+
+    <nav class="upper-nav">
+        <div class="nav-list">  
+
+            <span class="logo" id="menu"><a href="/">
+                <p><img class="logo-pic" src="/static/images/logo.png"></p>
+            </a></span>      
+
+            <span class="nav-item"><a href="/dashboard">
+                <p class="tag">Dashboard</p>
+            </a></span>
+
+            <span class="nav-item"><a href="/ranks">
+                <p class="tag">Ranks</p>
+            </a></span>
+
+            <span class="nav-item"><a href="/about">
+                <p class="tag">About</p>
+            </a></span>
+
+            <span class="nav-item"><a href="/more">
+                <p class="tag">More</p>
+            </a></span>
+
+            <span class="nav-item"><a href="/login">
+                <p class="tag">Log In</p>
+            </a></span>
+        </div>
+<!--<i class="fas fa-home"></i> <i class="fas fa-newspaper"></i> <i class="fas fa-user-plus"></i><i class="fas fa-sign-out-alt"></i>
+<i class="fas fa-user"></i> -->
+    </nav>
+    <!-- <img class="top-bg-img" src="/static/images/background.jpg" alt="background"> -->
+
+    <div class="sidebar hide">
+        <a class="header"><span><img id="hide-menu"></span></a>
+        <a href="/"><span>Home</span></a>
+        <a href="/leagues"><span>Leagues</span></a>
+        <a href="/news"><span>News</span></a>
+        <a href="/profile">Profile</span></a>
+    </div>
+    <div id="meta-container">
+
+        {% block body %}
+        {% endblock %}
+    </div>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script> -->
+
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>
+

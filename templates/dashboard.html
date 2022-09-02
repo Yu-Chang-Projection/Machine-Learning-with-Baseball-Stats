@@ -1,0 +1,45 @@
+{% extends 'module.html' %}
+        
+{% block title %}
+    <title>Home | Yu Chang Prediction</title>
+{% endblock %}
+
+{% block style_list %}
+    <link rel="stylesheet" href="static/stylesheets/dashboard.css" type="text/css">
+{% endblock %}
+
+{% block body %}
+    <table class="stat-table">
+    <thead>
+        <tr class="head-row">
+            {% for j in range(16)%}
+                {% if j == 0 %}
+                    <td class="head-name">{{head[j]}}</td>
+                {% endif %}
+                {% if j != 0 %}
+                    <td class="head-piece">{{head[j]}}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for i in range(311)%}
+        <tr>
+            {% for j in range(16)%}
+                {% if j == 0 %}
+                    <td class="player-name">{{stats.iloc[i].values.tolist()[j]}}</td>
+                {% endif %}
+                {% if j != 0 %}
+                    <td class="stat-piece">{{stats.iloc[i].values.tolist()[j]}}</td>
+                {% endif %}
+
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+    {% block scripts %}
+        <script src="/static/js/dashboard.js"></script>
+    {% endblock %}
+{% endblock %}
