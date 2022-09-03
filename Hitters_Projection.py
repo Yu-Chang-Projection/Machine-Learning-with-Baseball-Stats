@@ -3,7 +3,7 @@ import pickle
 from sklearn.preprocessing import PolynomialFeatures
 
 full_df = pd.read_csv('CSV_files/2022_data.csv')
-every_df = pd.read_csv('Every_player.csv')
+every_df = pd.read_csv('xStats.csv')
 
 def K_BB_projection(selected_stats, target_stat, type, total_stat):
 
@@ -20,7 +20,7 @@ def K_BB_projection(selected_stats, target_stat, type, total_stat):
             total = round(full_df.at[pid, 'PA'] * expected_stat, 0)
             every_df.at[i, f"x{target_stat}"] = expected_stat
             every_df.at[i, f"x{total_stat}"] = total
-            every_df.to_csv('Every_player.csv', index=None)
+            every_df.to_csv('xStats.csv', index=None)
 
     elif type == "L" or type == "Linear":
         model = pickle.load(open(filename, 'rb'))
@@ -32,7 +32,7 @@ def K_BB_projection(selected_stats, target_stat, type, total_stat):
             total = round(full_df.at[pid, 'PA'] * expected_stat, 0)
             every_df.at[i, f"x{target_stat}"] = expected_stat
             every_df.at[i, f"x{total_stat}"] = total
-            every_df.to_csv('Every_player.csv', index=None)
+            every_df.to_csv('xStats.csv', index=None)
 
 def BABIP_ISO_projection(selected_stats, target_stat, type):
 
@@ -47,7 +47,7 @@ def BABIP_ISO_projection(selected_stats, target_stat, type):
             predict = model.predict(poly.fit_transform([columns.loc[pid]]))  # feed in required data
             expected_stat = round(predict[0], 3)
             every_df.at[i, f"x{target_stat}"] = expected_stat
-            every_df.to_csv('Every_player.csv', index=None)
+            every_df.to_csv('xStats.csv', index=None)
 
     elif type == "L" or type == "Linear":
         model = pickle.load(open(filename, 'rb'))
@@ -57,7 +57,7 @@ def BABIP_ISO_projection(selected_stats, target_stat, type):
             predict = model.predict([columns.loc[pid]])  # feed in required data
             expected_stat = round(predict[0], 3)
             every_df.at[i, f"x{target_stat}"] = expected_stat
-            every_df.to_csv('Every_player.csv', index=None)
+            every_df.to_csv('xStats.csv', index=None)
 
 def HR_projection(selected_stats, target_stat, type, total_stat):
 
@@ -74,7 +74,7 @@ def HR_projection(selected_stats, target_stat, type, total_stat):
             total = round(full_df.at[pid, 'PA'] * (expected_stat/10), 0)
             every_df.at[i, f"x{target_stat}"] = expected_stat
             every_df.at[i, f"x{total_stat}"] = total
-            every_df.to_csv('Every_player.csv', index=None)
+            every_df.to_csv('xStats.csv', index=None)
 
     elif type == "L" or type == "Linear":
         model = pickle.load(open(filename, 'rb'))
@@ -86,7 +86,7 @@ def HR_projection(selected_stats, target_stat, type, total_stat):
             total = round(full_df.at[pid, 'PA'] * (expected_stat/10), 0)
             every_df.at[i, f"x{target_stat}"] = expected_stat
             every_df.at[i, f"x{total_stat}"] = total
-            every_df.to_csv('Every_player.csv', index=None)
+            every_df.to_csv('xStats.csv', index=None)
 
 #K%
 def K_proj():
@@ -165,7 +165,7 @@ def hitter_projections():
         iso = every_df.at[i, 'xISO']
         Events = plate_appearance-hbp-sf-k-bb
         BIP = Events-hr
-        xHits = BIP*babip + hr
+        xHits = round(BIP*babip + hr)
         AVG = round(xHits/at_bat, 3)
         OBP = round((xHits+bb+hbp)/(at_bat+bb+hbp+sf), 3)
         SLG = AVG + iso
@@ -177,7 +177,7 @@ def hitter_projections():
         every_df.at[i, "xOBP"] = OBP
         every_df.at[i, "xSLG"] = SLG
         every_df.at[i, "xOPS"] = OPS
-        every_df.to_csv('Every_player.csv', index=None)
+        every_df.to_csv('xStats.csv', index=None)
 
 hitter_projections()
 

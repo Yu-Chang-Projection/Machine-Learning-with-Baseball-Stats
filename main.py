@@ -13,10 +13,10 @@ app = Flask(__name__)
 @app.route("/dashboard")
 def dashboard():
     # load chart head
-    head = ['Name', 'Age', 'Team', 'Game', 'PA', 'AB', 'xAVG', 'xOBP', 'xSLG', 'xOPS', 'xHR', 'xK%', 'xBB%', 'xHR%', 'xBABIP', 'xISO', 'AVG', 'OBP', 'SLG', 'OPS', 'HR', 'OPS-xOPS', 'HBP', 'SF', 'xK', 'xBB', 'xEvents', 'xBIP', 'xH']
+    head = ['Name', 'Age', 'Team', 'G', 'PA', 'AB', 'xAVG', 'xOBP', 'xSLG', 'xOPS', 'xHR', 'xK%', 'xBB%', 'xHR%', 'xBABIP', 'xISO', 'HBP', 'SF', 'xK', 'xBB', 'xEvents', 'xBIP', 'xH']
 
     # read stat file
-    stats = pd.read_csv("CSV_files/xStats.csv")
+    stats = pd.read_csv("xStats.csv")
     stats = stats[head]
     print(stats)
     # get filter
