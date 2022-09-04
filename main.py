@@ -40,7 +40,7 @@ if __name__ == "__main__":
     # stats = pd.read_csv("CSV_files/xStats.csv")
     # stats = stats.sort_values(by=["xBB%"], ascending=False)
     # print(stats)
-    port = int(os.environ.get("PORT",5100))
+    port = int(os.environ.get("PORT",5000))
     # app.run(debug=True, port=port) # local
     app.run(host='0.0.0.0', debug=True, port=port) # remote
 
