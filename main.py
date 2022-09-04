@@ -41,5 +41,6 @@ if __name__ == "__main__":
     # stats = stats.sort_values(by=["xBB%"], ascending=False)
     # print(stats)
     port = int(os.environ.get("PORT",5100))
-    app.run(debug=True, port=port)
+    # app.run(debug=True, port=port) # local
+    app.run(host='0.0.0.0', debug=True, port=port) # remote
 
