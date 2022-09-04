@@ -3,4 +3,4 @@ sklearn==0.0
 flask==1.1.2
 Jinja2===2.11.2
 MarkupSafe===1.1.1
-itsdangerous
+itsdangerous==2.0.1
