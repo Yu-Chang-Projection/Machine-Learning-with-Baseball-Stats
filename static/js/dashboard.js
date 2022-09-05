@@ -32,5 +32,4 @@ function hightlightColumn(){
         $(this).addClass("hightlight-column")
     })
 }
-
 hightlightColumn()

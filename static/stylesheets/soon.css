@@ -1,0 +1,25 @@
+.soon{
+    font-size: 60px;
+    color: #1B2E59
+}
+.soon-small{
+    font-size: 30px;
+    color: #1B2E59;
+    margin-top: 1vh;
+}
+
+.soon-text{
+    width: 100%;
+    padding-top: 35vh;
+    margin-left: 6vw;
+}
+.soon-player{
+    height: 85vh;
+}
+.error-player{
+    padding-top: 10vh;
+    height: 70vh;
+}
+.soon-box{
+    display: flex;
+}

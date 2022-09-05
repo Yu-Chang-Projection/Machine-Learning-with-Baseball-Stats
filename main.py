@@ -31,9 +31,16 @@ def dashboard():
         stats = stats.sort_values(by=[sort_by], ascending = ascending)
     return render_template("dashboard.html",head = head, stats = stats)
 
-# @app.route("/stats/<pid>")
-# def player(pid):
-#     return pid
+@app.route("/ranks")
+@app.route("/about")
+@app.route("/more")
+@app.route("/link")
+def player():
+    return render_template("soon.html")
+
+@app.errorhandler(404)
+def notfound(e):
+    return render_template("notfound.html"),404
 
 if __name__ == "__main__":
 
