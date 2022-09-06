@@ -2,7 +2,7 @@ import pandas as pd
 import pickle
 from sklearn.preprocessing import PolynomialFeatures
 
-full_df = pd.read_csv('CSV_files/2022_data.csv')
+full_df = pd.read_csv('CSV_files/Stats.csv')
 every_df = pd.read_csv('xStats.csv')
 
 def K_BB_projection(selected_stats, target_stat, type, total_stat):
@@ -166,18 +166,23 @@ def hitter_projections():
         Events = plate_appearance-hbp-sf-k-bb
         BIP = Events-hr
         xHits = round(BIP*babip + hr)
-        AVG = round(xHits/at_bat, 3)
-        OBP = round((xHits+bb+hbp)/(at_bat+bb+hbp+sf), 3)
-        SLG = AVG + iso
-        OPS = OBP + SLG
+        xAVG = round(xHits/at_bat, 3)
+        xOBP = round((xHits+bb+hbp)/(at_bat+bb+hbp+sf), 3)
+        xSLG = xAVG + iso
+        xOPS = xOBP + xSLG
+        AVG = every_df.at[i, 'AVG']
+        OPS = every_df.at[i, 'OPS']
+        HR = every_df.at[i, 'HR']
         every_df.at[i, "xEvents"] = Events
         every_df.at[i, "xBIP"] = BIP
         every_df.at[i, "xH"] = xHits
-        every_df.at[i, "xAVG"] = AVG
-        every_df.at[i, "xOBP"] = OBP
-        every_df.at[i, "xSLG"] = SLG
-        every_df.at[i, "xOPS"] = OPS
+        every_df.at[i, "xAVG"] = xAVG
+        every_df.at[i, "xOBP"] = xOBP
+        every_df.at[i, "xSLG"] = xSLG
+        every_df.at[i, "xOPS"] = xOPS
+        every_df.at[i, "AVG-xAVG"] = AVG-xAVG
+        every_df.at[i, "OPS-xOPS"] = OPS-xOPS
+        every_df.at[i, "HR-xHR"] = HR-hr
         every_df.to_csv('xStats.csv', index=None)
-
 hitter_projections()
 

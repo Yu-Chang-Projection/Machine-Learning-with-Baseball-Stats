@@ -2,7 +2,7 @@ import pandas as pd
 
 df = pd.read_csv('CSV_files/Stats.csv')
 
-for i in range(0, 322):
+for i in range(0, 325):
     Pitches = float(df.iat[i, 3])
     Swing_pct = float(df.iat[i, 4])
     Contact_pct = float(df.iat[i, 5])
