@@ -34,7 +34,7 @@ def dashboard():
 @app.route("/ranks")
 @app.route("/about")
 @app.route("/more")
-@app.route("/link")
+@app.route("/link ")
 def player():
     return render_template("soon.html")
 
