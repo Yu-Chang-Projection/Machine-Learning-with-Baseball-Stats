@@ -13,8 +13,9 @@ app = Flask(__name__)
 @app.route("/dashboard")
 def dashboard():
     # load chart head
-    head = ['Name', 'Age', 'Team', 'G', 'PA', 'AB', 'xAVG', 'xOBP', 'xSLG', 'xOPS', 'xHR', 'xK%', 'xBB%', 'xHR%', 'xBABIP', 'xISO', 'HBP', 'SF', 'xK', 'xBB', 'xEvents', 'xBIP', 'xH']
-
+    head = ['Name', 'Age', 'Team', 'G', 'PA', 'AB', 'xAVG', 'xOBP', 'xSLG', 'xOPS', 'xHR', 'xK%', 'xBB%', 'AVG-xAVG',
+            'OPS-xOPS', 'HR-xHR', 'xHR%', 'xBABIP', 'xISO', 'HBP', 'SF', 'xK', 'xBB', 'xEvents', 'xBIP', 'xH', 'AVG',
+            'OBP', 'SLG', 'OPS', 'HR']
     # read stat file
     stats = pd.read_csv("xStats.csv")
     stats = stats[head]
