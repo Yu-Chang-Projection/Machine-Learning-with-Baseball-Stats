@@ -32,8 +32,11 @@ def dashboard():
         stats = stats.sort_values(by=[sort_by], ascending = ascending)
     return render_template("dashboard.html",head = head, stats = stats)
 
-@app.route("/ranks")
 @app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/ranks")
 @app.route("/more")
 @app.route("/link ")
 def player():
