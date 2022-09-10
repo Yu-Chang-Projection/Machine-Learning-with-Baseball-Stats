@@ -2,14 +2,14 @@ import pandas as pd
 
 df = pd.read_csv('CSV_files/Stats.csv')
 
-for i in range(0, 325):
-    Pitches = float(df.iat[i, 3])
-    Swing_pct = float(df.iat[i, 4])
-    Contact_pct = float(df.iat[i, 5])
+for i in range(0, df.shape[0]):
+    Pitches = df.at[i, 'Pitches']
+    Swing_pct = df.iat[i, 'Swing%']
+    Contact_pct = df.iat[i, 'Contact%']
     Contacted_Balls = round(Pitches*Swing_pct*Contact_pct)
-    GB = float(df.iat[i, 6])
-    FB = float(df.iat[i, 7])
-    LD = float(df.iat[i, 8])
+    GB = df.iat[i, 'GB']
+    FB = df.iat[i, 'FB']
+    LD = df.iat[i, 'LD']
     Events = GB+FB+LD
     Fouls = Contacted_Balls-Events
     Fair_Foul_ratio = (Events/Contacted_Balls)/(Fouls/Contacted_Balls)
