@@ -1,0 +1,72 @@
+
+.about-section{
+    display: flex;
+    height:80vh;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.about-block{
+    display: flex;
+    text-align: center;
+    font-size: 6vh;
+    height: 48%;
+    width: 31.5%; 
+    margin: 0.5% 0.5% 0.5% 0.5%;
+    align-items: center;
+    justify-content: center;
+    border: #1B2E59 solid 0.2vw;
+    border-radius: 2vw;
+    background-color: #D4E1FF;
+    color: #1B2E59;
+}
+
+.hide{
+    display: none;
+}
+
+.about-text{
+    font-size: 3vh;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh 1vw 1vh 1vw;
+}
+
+.about-block:hover{
+    /* background-image: none; */
+    background-color: #1B2E59;
+    border: #D4E1FF solid 0.2vw;
+    color: #D4E1FF;
+    transition-duration: 0.35s;
+}
+
+.members{
+    background-image: url("/static/images/members.png");
+    background-size: cover;
+}
+
+.motivation{
+    background-image: url("/static/images/motivation.png");
+    background-size: cover;
+}
+
+.goals{
+    background-image: url("/static/images/goals.png");
+    background-size: cover;
+}
+
+.method{
+    background-image: url("/static/images/method.png");
+    background-size: cover;
+}
+
+.future{
+    background-image: url("/static/images/future.png");
+    background-size: cover;
+}
+
+.others{
+    background-image: url("/static/images/others.png");
+    background-size: cover;
+}

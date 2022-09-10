@@ -1,19 +1,60 @@
 {% extends 'module.html' %}
         
 {% block title %}
-    <title>Page Not Found | Yu Chang Prediction</title>
+    <title>About | Yu Chang Prediction</title>
 {% endblock %}
 
 {% block style_list %}
-    <link rel="stylesheet" href="static/stylesheets/soon.css" type="text/css">
+    <link rel="stylesheet" href="static/stylesheets/about.css" type="text/css">
 {% endblock %}
 
 {% block body %}
-    <span class="soon-box">
-        <img class="error-player" src="/static/images/error.jpg">
-        <span class="soon-text">
-            <p class="soon">Page Not Found!!</p>
-            <p class="soon-small">Sorry, we cannot find the page you're looking for :(</p>
-        </span>
+<p class="head">About</p>
+<div class="about-section">
+    <span class="about-block members">
+        <p class="about-title">Members</p>
+        <p class="about-text hide">Hello there and welcome to the website of Yu Chang Projections!
+             We’re Alan Chang and Darrell Yu, two college students that love baseball and stats.</p>
     </span>
+    <span class="about-block motivation">
+        <p class="about-title">Motivation</p>
+        <p class="about-text hide">We are enthusiastic about Fantasy baseball, 
+            so we want to find a better way to evaluate players before the season starts.
+            Therefore, we came up with the idea of making our own projection system
+            to improve our drafting strategy.</p>
+    </span>
+    <span class="about-block goals">
+        <p class="about-title">Goals</p>
+        <p class="about-text hide">The long-term goal of our project is to create a projection
+            model that is accurate in predicting players performance.
+            Aside from stats, that should also include predicting
+            breakouts and bust performances.</p>
+    </span>
+    <span class="about-block method">
+        <p class="about-title">Methodology</p>
+        <p class="about-text hide">In our project, we reference stats from Fangraphs and Statcast 
+            for projections. For different to-project stats, we use our function to select the best
+             stat combo and feed them into a regression model to train. For example, we use various
+              plate discipline stats for our K% projections. As for samples, we select
+              players with over 400 plate appearances in a single season from 2015 to 2021.</p>
+    </span>
+    <span class="about-block future">
+        <p class="about-title">Future</p>
+        <p class="about-text hide">We will update our future projections and advanced content for users  
+            on this websites! Follow us on our social media account and we will keep you updated!</p>
+    </span>
+    <span class="about-block others">
+        <p class="about-title">Others</p>
+        <p class="about-text hide">Do You Know? <br>
+            Edwin Jackson Played For the Most MLB Teams
+            In 2019, pitcher Edwin Jackson became the first player in history to play for 14 
+            MLB teams, a feat accomplished within his 17-year career. The previous record was 
+            held by Octavio Dotel, also a pitcher. Dotel played for 13 teams during his 
+            15-year MLB career.</p>
+        <p></p>
+    </span>
+</div>
+    {% block scripts %}
+    <script src="/static/js/about.js"></script>
+    {% endblock %}
 {% endblock %}
