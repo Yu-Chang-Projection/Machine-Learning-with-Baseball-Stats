@@ -1,6 +1,6 @@
 from flask import Flask
-import os
-from flask import render_template, url_for, request
+import os, json
+from flask import render_template, url_for, request, redirect
 import pandas as pd
 
 app = Flask(__name__)
@@ -30,7 +30,8 @@ def dashboard():
         stats = stats.sort_values(by=["xOPS"], ascending = ascending)
     else:
         stats = stats.sort_values(by=[sort_by], ascending = ascending)
-    return render_template("dashboard.html",head = head, stats = stats)
+    players = stats.iloc[:,0].to_list() # get all player names
+    return render_template("dashboard.html",head = head, stats = stats, players = players)
 
 @app.route("/about")
 def about():
@@ -48,10 +49,9 @@ def notfound(e):
 
 if __name__ == "__main__":
 
-    # stats = pd.read_csv("CSV_files/xStats.csv")
-    # stats = stats.sort_values(by=["xBB%"], ascending=False)
-    # print(stats)
+    # stats = pd.read_csv("CSV_files/Stats.csv")
+
     port = int(os.environ.get("PORT",5555))
     # app.run(debug=True, port=port) # local
-    app.run(host='0.0.0.0', debug=True, port=port) # remote
+    app.run(host='0.0.0.0', debug=False, port=port) # remote
 

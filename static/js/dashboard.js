@@ -20,16 +20,55 @@ function hightlightColumn(){
     // get cols
     var nth = 0
     var col = 0
-    $(".head-piece").each(function(){
-        var this_col = $(this).text()
-        nth += 1
-        if(this_col == sort_by){
+    if(sort_by==null){
+        $(`thead>tr>td:nth-child(10)`).addClass("hightlight-column")
+        $(`tbody>tr>td:nth-child(10)`).each(function(){
             $(this).addClass("hightlight-column")
-            col = nth
+        })
+    }
+    else{
+        $(".head-piece").each(function(){
+            var this_col = $(this).text()
+            nth += 1
+            if(this_col == sort_by){
+                $(this).addClass("hightlight-column")
+                col = nth
+            }
+        })
+        $(`tbody>tr>td:nth-child(${col+1})`).each(function(){
+            $(this).addClass("hightlight-column")
+        })
+    }
+}
+
+// search submit on click actions
+$("#search-submit").on("click",function(){
+    $(".search-result").empty() //clear dropdown, in case search again
+    $(".hightlight-row").removeClass("hightlight-row") // clear previous highlight
+    var searchVal = $("#enter").val()
+    var players = $("#player-list").text().slice(2,-2).split("\', \'")
+    var result_players = players.filter(player => player.includes(searchVal))
+    console.log(result_players.length)
+    for(var i=0;i<result_players.length;i++){ // add player results to dropdown
+        if($(".search-result").text().includes(result_players[i])==false){
+            $(".search-result").append(`<p>${result_players[i]}</p>`)
+        }
+    }
+    $(".search-result").css("display","block")
+})
+
+// search result dropdown on click actions
+$(".search-result").on("click","p",function(){
+    $("#enter").val($(this).text())
+    var target_player = $(this).text()
+    $(".search-result").empty() // clear search dropdown
+    $(".player-name").each(function(){
+        if(target_player==$(this).text()){
+           $(this).parent().addClass("hightlight-row") //highlight row
+           console.log(document.getElementsByClassName("hightlight-row")[0]
+           .scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})) // scroll to
         }
     })
-    $(`tbody>tr>td:nth-child(${col+1})`).each(function(){
-        $(this).addClass("hightlight-column")
-    })
-}
+})
+
 hightlightColumn()
