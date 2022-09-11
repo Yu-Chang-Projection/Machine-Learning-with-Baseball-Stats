@@ -10,8 +10,10 @@ by Yu Chang Projections
     - Build and Deploy website to https://yu-chang-projections.herokuapp.com
     - Include Dashoard, which contains expected stats (xStats) that is predicted by our own system -- Yu Chang Projection
     - Include Ranks, About, More, Log In tabs that are to be updated
-### Version 1.1.0: (Current)
+### Version 1.1.0:
     - Add "Coming Soon", "Not Found" render page
     - Add "About" page
     - Change "Log In" to "Links"
     - Add AVG-xAVG, OPS-xOPS, HR-xHR stats
+### Version 1.1.1: (Current)
+    - Add search bar on Dashboard
