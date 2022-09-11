@@ -53,6 +53,12 @@ td{
     margin: 1vh 0 1.5vh 0;
     height: 4vh;
     direction: ltr;
+    font-size: 2.6vh;
+}
+
+#enter{
+    height: 2.8vh;
+    font-size: 2.4vh;
 }
 
 .search-bar{
@@ -62,7 +68,7 @@ td{
 
 .search{
     color: #1B2E59;
-    height: 1.7vh;
+    height: 2vh;
 }
 
 #search-submit{ 
