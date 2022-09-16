@@ -9,8 +9,9 @@
 {% endblock %}
 
 {% block body %}
-    <span class="hidden" id="player-list">{{ players }}</span>
     <p class="head">Dashboard</p>
+    <span class="hidden" id="player-list">{{ players }}</span>
+    <span class="player-preview hidden"></span>
     <div class="search-field">
         <label for="enter">Search Player: </label>
         <div class="search-bar">
@@ -20,7 +21,6 @@
         </div>
         <button id="search-submit"><img class="search" src=/static/images/search.png></button>
     </div>
-
     <table class="stat-table">
     <thead>
         <tr class="head-row">

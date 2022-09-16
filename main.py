@@ -39,7 +39,7 @@ def about():
 
 @app.route("/ranks")
 @app.route("/more")
-@app.route("/link ")
+@app.route("/link")
 def player():
     return render_template("soon.html")
 

@@ -71,4 +71,35 @@ $(".search-result").on("click","p",function(){
     })
 })
 
+// show player preview
+$(".player-name").on("mouseenter",function(){
+    $(".player-preview").empty()
+    $(this).addClass("player-onhover")
+    var pos = $(this).position()
+    console.log(pos["top"],pos["left"])
+    $(".player-preview").css("display","flex")
+    $(".player-preview").css("top",pos["top"]+window.innerHeight*0.262)
+    $(".player-preview").append(
+        `
+        <div class="preview-title">
+            <span class="preview-name">Vinnie Pasquantino</span>
+            <span class="preview-age">Age: 23</span>
+            <span class="preview-info">KC</span>
+            <span class="preview-age">RF/LF</span>
+            <span class="preview-info">L/R</span>
+        </div>
+        <div class="preview-content">
+            <p class="preview-stat">xRank: 7</p>
+            <p class="preview-stat">xSlashline: 0.299/0.442/0.578</p>
+            <p class="preview-stat">Consistency: High</p>
+            <p class="preview-stat">Injury Prone: Low</p>
+        </div>`
+    )
+})
+// $(".player-name").on("mouseleave",function(){
+//     $(this).removeClass("player-onhover")
+//     $(".player-preview").empty()
+//     $(".player-preview").css("display","none")
+// })
+
 hightlightColumn()

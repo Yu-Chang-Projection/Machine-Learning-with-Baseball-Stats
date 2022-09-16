@@ -98,3 +98,51 @@ td{
 .hidden{
     display: none;
 }
+
+.player-onhover{
+    background-color: #1B2E59;
+    color: white
+}
+
+.player-preview{
+    z-index: 1;
+    opacity: 98%;
+    background-color: #e4edff;
+    position: absolute;
+    height: 20vh;
+    width: 36vw;
+    border: #1B2E59 0.15vw solid;
+    padding: 1.5vh 1.5vw 1.5vh 1.5vw;
+    flex-direction: column;
+}
+
+.preview-title{
+    width: 100%;
+    height: 30%;
+    font-size: 3.4vh;
+    display: flex;
+    direction: ltr;
+    text-align: center;
+}
+
+.preview-name{
+    text-align: left;
+    width:44%;
+}
+
+.preview-age{
+    width: 18%
+}
+
+.preview-info{
+    width: 12%;
+}
+
+.preview-content{
+    height: 70%;
+}
+
+.preview-stat{
+    height: 25%;
+    font-size: 2.6vh;
+}
