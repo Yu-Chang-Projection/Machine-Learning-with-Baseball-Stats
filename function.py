@@ -7,10 +7,10 @@ import pickle
 from sklearn.preprocessing import PolynomialFeatures
 
 # functions
-def training_function(selected_stats, target_stat, type, test_size, prev_R2 = 0.96, loops = 100):
+def training_function(selected_stats, target_stat, type, test_size, prev_R2 = 0.6, loops = 100):
 
     def save_model(regr):
-        filename = f'../Best_Models/{type}_{target_stat}_({str(int(test_size*100))}).pkl'
+        filename = f'../Best_Models/{type}_{target_stat}.pkl'
         pickle.dump(regr, open(filename, 'wb'))  # Save the model
 
     # create Dataframes

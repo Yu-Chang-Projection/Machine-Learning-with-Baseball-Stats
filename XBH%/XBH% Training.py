@@ -2,18 +2,18 @@ import itertools
 from function import training_function
 
 # parameters
-selected_stats = ["FB%","GB%","LD%","SweetSpot%","Pull%","Cent%","Oppo%","Barrel%","HardHit%","LDFB_EV","Spd"]
-target_stat = "2B%"
+selected_stats = ["FB%","GB%","LD%","LA","SweetSpot%","Pull%","Cent%","Oppo%","Barrel%","HardHit%","LDFB_EV","Spd","UBR"]
+target_stat = "XBH%"
 
 # run function
-for i in range(10,20):
-    for stat_combo in itertools.combinations(selected_stats,11):
+for i in range(1):
+    for stat_combo in itertools.combinations(selected_stats,13):
         stat_combo = list(stat_combo)
         print (stat_combo)
         training_function(
             selected_stats = stat_combo,
             target_stat = target_stat,
-            test_size = i/100,
+            test_size = 0.13,
             loops = 100,
             type = "Linear"
         )
