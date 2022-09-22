@@ -6,7 +6,7 @@ selected_stats = ["FB%","GB%","LD%","SweetSpot%","Barrel%","HardHit%","LDFB_EV",
 target_stat = "ISO"
 
 # run function
-for i in range(1):
+for i in range(2):
     for stat_combo in itertools.combinations(selected_stats,10):
         stat_combo = list(stat_combo)
         print (stat_combo)

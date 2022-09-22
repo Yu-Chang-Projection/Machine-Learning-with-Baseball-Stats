@@ -114,7 +114,7 @@ def BB_proj():
 
 #BABIP
 def BABIP_proj():
-    selected_stats = ["LD%","GB%","FB%","SweetSpot%","Barrel%","HardHit%","Cent%","Oppo%","Spd"]
+    selected_stats = ["LD%","GB%","FB%","SweetSpot%","Barrel%","HardHit%","Cent%","Oppo%","Spd","LDFB_EV"]
     target_stat = "BABIP"
     selected_stats = list(selected_stats)
     BABIP_ISO_projection(
@@ -125,7 +125,7 @@ def BABIP_proj():
 
 #HR%
 def HR_proj():
-    selected_stats = ["FB%","LD%","HR/FB","Pull%","Barrel%","HardHit%","LDFB_EV"]
+    selected_stats = ["LA","FB%","LD%","HR/FB","Pull%","Barrel%","HardHit%","LDFB_EV"]
     target_stat = "HR%"
     selected_stats = list(selected_stats)
     HR_projection(
