@@ -7,7 +7,7 @@ import pickle
 from sklearn.preprocessing import PolynomialFeatures
 
 # functions
-def training_function(selected_stats, target_stat, type, test_size, prev_R2 = 0.815, loops = 100):
+def training_function(selected_stats, target_stat, type, test_size, prev_R2 = 0.99, loops = 100):
 
     def save_model(regr):
         filename = f'../Best_Models/{target_stat}_best.pkl'
