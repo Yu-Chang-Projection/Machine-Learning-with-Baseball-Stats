@@ -4,7 +4,7 @@ df = pd.read_csv('CSV_files/Stats.csv')
 
 for i in range(0, df.shape[0]):
     pid = df.iat[i, 0]
-    Pitc2hes = df.at[pid, 'Pitches']
+    Pitches = df.at[pid, 'Pitches']
     Swing_pct = df.at[pid, 'Swing%']
     Contact_pct = df.at[pid, 'Contact%']
     Contacted_Balls = round(Pitches*Swing_pct*Contact_pct)
